@@ -1,27 +1,16 @@
 import { takeEvery, put, call, take } from 'redux-saga/effects';
+import { IMAGES } from '../constants';
 
 // worker saga
-function* workerSaga() {
-    console.log('Hello from workerSaga');
-    console.log(put({type:'ACTION_FROM_WORKER'}));
-    yield put({type:'ACTION_FROM_WORKER'});
-}
-
-function* byebyeSaga() {
-    console.log('bye bye');
+function* handleImagesLoad() {
+    console.log('fetching images from unsplash');
 }
 
 // watcher saga
 function* rootSaga() {
-    yield take('LOGIN');
-    yield call(workerSaga);
-/*     yield take('ADD_TO_CART');
-    yield take('BUY'); */
-    yield take('LOGOUT');
-    yield call(byebyeSaga);
+    takeEvery(IMAGES.LOAD, handleImagesLoad)
 };
 
 
 // watcher saga => actions => worker saga
-
 export default rootSaga;
